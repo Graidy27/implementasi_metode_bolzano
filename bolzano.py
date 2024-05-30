@@ -181,22 +181,23 @@ def reviewFunc():
 
 
 def calc(x):
-    temp = 1
-    fx = 0
+    temp = 1.0
+    fx = 0.0
 
     # ------------- Calculate Polynom -------------
-    for type in poly_dict:
-        temp = np.power(x, type)
-        temp *= poly_dict[type]
+    for types in poly_dict:
+        temp = np.power(x, types)
+        temp *= poly_dict[types]
         fx += temp
     # ---------------------------------------------
     # ------------ Calculate Logarithm ------------
     for logExpression in log_dict:
         temp = log_dict[logExpression]
-        if (logExpression == "e"):
-            temp *= np.log(np.e, x)            # log(base, x)
+        if (logExpression == 'e'):
+            temp *= np.log(x)            # log(base, x)
         else:
-            temp *= np.log(int(logExpression), x)
+            temp *= np.log(x)
+            temp /= np.log(int(logExpression))
         fx += temp
     # ---------------------------------------------
     # ------------- Calculate Exponent ------------
@@ -242,6 +243,8 @@ def table(iter):
 
 
 def drawGraph(batas1, batas2):
+    ytemp = 0
+    xtemp = 0
     selisih = abs(batas1 - batas2)/15
     selisih = round(selisih, 2)
 
